@@ -22,5 +22,5 @@ This is a full-stack Node.js app using Express and EJS templates.
 
 1. Clone the repo:
 
-   git clone https://github.com/your-username/your-repo.git
+   git clone https://github.com/sandeepverma2002/task.git
    cd your-repo

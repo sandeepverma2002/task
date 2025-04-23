@@ -1,4 +1,4 @@
-// server.js (Express Version with Rate Limiting)
+// server.js
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
 const fetch = require('node-fetch');
 const pool = require('./db');
+const keepAlive = require('./KeepAlive'); // Import the keep-alive function
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -19,10 +20,13 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+// Start keep-alive ping to prevent database connection from sleeping
+keepAlive(); // This will keep the DB connection alive
+
 // Rate Limiter for login
 const loginLimiter = rateLimit({
-  windowMs: 5 * 60 * 1000,
-  max: 3,
+  windowMs: 5 * 60 * 1000, // 5 minutes window
+  max: 3, // Allow 3 requests in 5 minutes
   message: 'Too many login attempts, please try again after 5 min later.',
 });
 
