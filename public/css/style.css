@@ -1,0 +1,194 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f0f2f5;
+  }
+  
+  .navbar {
+    background-color: #333;
+    padding: 1em;
+  }
+  
+  .navbar ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar li {
+    margin-right: 20px;
+  }
+  
+  .navbar a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .container {
+    padding: 2em;
+  }
+  .login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+  .login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .login-container form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  .login-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .login-container button:hover {
+    background-color: #555;
+  }
+
+  .login-container .error-msg {
+    color: red;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .login-container p {
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  .g-recaptcha {
+    margin-bottom: 15px;
+  }
+  .register-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+  .register-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .register-container form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  .register-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #0066cc;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .register-container button:hover {
+    background-color: #004e9a;
+  }
+
+  .register-container .error-msg {
+    color: red;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .register-container .success-msg {
+    color: green;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .register-container p {
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  a {
+    color: #0066cc;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+
+  .das-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .das-header {
+    font-size: 28px;
+    color: #2E8B57;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .das-info {
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  .das-success-msg {
+    color: green;
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  .das-logout {
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+
+  .das-logout:hover {
+    background-color: #0056b3;
+  }

@@ -1,4 +1,3 @@
-// server.js
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
@@ -8,25 +7,24 @@ const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
 const fetch = require('node-fetch');
 const pool = require('./db');
-const keepAlive = require('./KeepAlive'); // Import the keep-alive function
+const keepAlive = require('./KeepAlive');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Start keep-alive ping to prevent database connection from sleeping
-keepAlive(); // This will keep the DB connection alive
+keepAlive(); // keep the DB connection alive
 
 // Rate Limiter for login
 const loginLimiter = rateLimit({
-  windowMs: 5 * 60 * 1000, // 5 minutes window
-  max: 3, // Allow 3 requests in 5 minutes
+  windowMs: 5 * 60 * 1000, // 5 minutes wait
+  max: 3, //3 times try only
   message: 'Too many login attempts, please try again after 5 min later.',
 });
 
@@ -43,6 +41,10 @@ function authenticateToken(req, res, next) {
 }
 
 // Routes
+app.get('/', (req, res) => {
+  res.render('index');
+});
+
 app.get('/register', (req, res) => {
   res.render('register', { error: null, success: null });
 });
@@ -121,7 +123,12 @@ app.post('/login', loginLimiter, async (req, res) => {
       const match = await bcrypt.compare(password, user.password);
       if (match) {
         const token = jwt.sign(
-          { userId: user.id, username: user.username, email: user.email },
+          {
+            userId: user.id,
+            username: user.username,
+            email: user.email,
+            created_at: user.created_at,
+          },
           process.env.JWT_SECRET,
           { expiresIn: '15m' }
         );
@@ -138,7 +145,27 @@ app.post('/login', loginLimiter, async (req, res) => {
 
 app.get('/dashboard', authenticateToken, (req, res) => {
   const successMessage = req.query.success ? true : false;
-  res.render('dashboard', { user: req.user, success: successMessage });
+
+  console.log(req.user);
+
+  const createdAt = new Date(req.user.created_at);
+  const formattedCreatedAt = !isNaN(createdAt.getTime())
+    ? createdAt.toLocaleDateString('en-IN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: true,
+      })
+    : null;
+
+  res.render('dashboard', {
+    user: { ...req.user, formattedCreatedAt },
+    success: successMessage,
+    tokenExpiry: req.user.exp,
+  });
 });
 
 app.get('/logout', (req, res) => {

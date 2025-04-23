@@ -1,26 +1,37 @@
 <!DOCTYPE html>
-<html>
-<head><title>Register</title></head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register</title>
+  <link rel="stylesheet" href="/css/style.css" />
+ 
+</head>
 <body>
-  <h2>Register</h2>
 
-  <% if (error) { %>
-    <p style="color:red;"><%= error %></p>
-  <% } %>
-  
-  <% if (success) { %>
-    <p style="color:green;"><%= success %></p>
-  <% } %>
-  
+  <%- include('index') %>
 
-  <form method="POST" action="/register">
-    <input type="text" name="username" placeholder="Username" required><br>
-    <input type="email" name="email" placeholder="Email" required><br>
-    <input type="password" name="password" placeholder="Password" minlength="8" required><br>
+  <div class="register-container">
+    <h2>Create Account</h2>
+
+    <% if (error) { %>
+      <div class="error-msg"><%= error %></div>
+    <% } %>
     
-    <button type="submit">Register</button>
-  </form>
+    <% if (success) { %>
+      <div class="success-msg"><%= success %></div>
+    <% } %>
 
-  <a href="/login">Already have an account? Login here</a>
+    <form method="POST" action="/register">
+      <input type="text" name="username" placeholder="Username" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="password" name="password" placeholder="Password (min 8 characters)" minlength="8" required />
+      
+      <button type="submit">Register</button>
+    </form>
+
+    <p>Already have an account? <a href="/login">Login here</a></p>
+  </div>
+
 </body>
 </html>
