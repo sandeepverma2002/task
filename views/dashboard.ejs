@@ -21,7 +21,6 @@
     <p class="das-info">Email: <%= user.email %></p>
 
    
-    <!-- Display the formatted Created At date -->
     <p class="das-info">Joined On: <%= user.formattedCreatedAt %></p>
 
     <% if (success) { %>
@@ -41,7 +40,7 @@
   
 
     var tokenExpiry = <%= tokenExpiry %> * 1000;
-    const warningTime = 2 * 60 * 1000; // alert 2 minutes before 
+    const warningTime = 5 * 60 * 1000; //5 min phale alert to session expiry
 
   const now = new Date().getTime();
   const timeLeft = tokenExpiry - now;

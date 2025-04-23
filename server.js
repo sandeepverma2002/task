@@ -146,18 +146,12 @@ app.post('/login', loginLimiter, async (req, res) => {
 app.get('/dashboard', authenticateToken, (req, res) => {
   const successMessage = req.query.success ? true : false;
 
-  console.log(req.user);
-
   const createdAt = new Date(req.user.created_at);
   const formattedCreatedAt = !isNaN(createdAt.getTime())
     ? createdAt.toLocaleDateString('en-IN', {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
-        hour12: true,
       })
     : null;
 
