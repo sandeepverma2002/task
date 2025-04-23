@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      text-align: center;
+    }
+    input {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 8px;
+    }
+    button {
+      padding: 10px 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Login</h2>
+  
+  <% if (error) { %>
+    <p style="color:red;"><%= error %></p>
+  <% } %>
+  
+  <form id="loginForm" method="POST" action="/login" autocomplete="off">
+    <input name="email" type="email" placeholder="Email" required />
+    <input name="password" type="password" placeholder="Password" required />
+
+    <div class="g-recaptcha" data-sitekey="6LfNzSArAAAAAI_3TCFFhoPdeAMIaWNSfKn5iZkg"></div>
+
+    <button type="submit">Login</button>
+  </form>
+
+  <p><a href="/register">Create an account</a></p>
+
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      const recaptchaResponse = grecaptcha.getResponse();
+      if (!recaptchaResponse) {
+        event.preventDefault();
+        alert("Please complete the reCAPTCHA.");
+      }
+    });
+  </script>
+</body>
+</html>
